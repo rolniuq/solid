@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type GoodShape interface {
 	Area() float64
 }
@@ -34,21 +32,23 @@ func (r *Rectangle) Area() float64 {
 }
 
 func goodInit() {
-	c := GoodCircle{
-		Radius: 5,
+	var shape GoodShape
+	shapeWanted := "square"
+	switch shapeWanted {
+	case "circle":
+		shape = &GoodCircle{
+			Radius: 5,
+		}
+	case "rectangle":
+		shape = &Rectangle{
+			Width:  5,
+			Height: 5,
+		}
+	case "square":
+		shape = &GoodSquare{
+			Side: 5,
+		}
 	}
 
-	s := GoodSquare{
-		Side: 5,
-	}
-
-	r := Rectangle{
-		Width:  5,
-		Height: 5,
-	}
-
-	shapes := []GoodShape{&c, &s, &r}
-	for _, shape := range shapes {
-		fmt.Println(shape.Area())
-	}
+	shape.Area()
 }
